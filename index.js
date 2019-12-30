@@ -1,6 +1,7 @@
 import MapView from './lib/components/MapView';
+import Marker from './lib/components/MapMarker.js';
+import Overlay from './lib/components/MapOverlay.js';
 
-export { default as Marker } from './lib/components/MapMarker.js';
 export { default as Polyline } from './lib/components/MapPolyline.js';
 export { default as Heatmap } from './lib/components/MapHeatmap.js';
 export { default as Polygon } from './lib/components/MapPolygon.js';
@@ -9,7 +10,6 @@ export { default as UrlTile } from './lib/components/MapUrlTile.js';
 export { default as WMSTile } from './lib/components/MapWMSTile.js';
 export { default as LocalTile } from './lib/components/MapLocalTile.js';
 export { default as MbTile } from './lib/components/MapMbTile.js';
-export { default as Overlay } from './lib/components/MapOverlay.js';
 export { default as Callout } from './lib/components/MapCallout.js';
 export {
   default as CalloutSubview,
@@ -23,7 +23,12 @@ export {
   ProviderPropType,
 } from './lib/components/MapView';
 
+export { Marker, Overlay };
+
 export const PROVIDER_GOOGLE = MapView.PROVIDER_GOOGLE;
 export const PROVIDER_DEFAULT = MapView.PROVIDER_DEFAULT;
+
+export const MarkerAnimated = Marker.Animated;
+export const OverlayAnimated = Overlay.Animated;
 
 export default MapView;
