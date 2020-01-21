@@ -11,12 +11,16 @@ import MapView from 'react-native-maps';
 
 const { width, height } = Dimensions.get('window');
 
+// replace PROJECT_ROOT with the right path
+const PATH_TO_MBTILES = '/PROJECT_ROOT/example/countries-raster.mbtiles';
+const MIN_ZOOM = 0;
+const MAX_ZOOM = 10;
+
 const ASPECT_RATIO = width / height;
-const LATITUDE = 23.736906;
-const LONGITUDE = 90.397768;
+const LATITUDE = 64.128288;
+const LONGITUDE = -21.827774;
 const LATITUDE_DELTA = 0.022;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -32,15 +36,20 @@ export default class App extends Component<Props> {
     this.setState({
       offlineMap: !this.state.offlineMap,
     });
-  }
+  };
+
+  onLayout = () => {
+    this.setState({ minZoomLevel: MIN_ZOOM });
+  };
 
   render() {
     return (
-      <View
-        style={styles.container}
-      >
+      <View style={styles.container}>
         <MapView
           style={styles.map}
+          onLayout={this.onLayout}
+          maxZoomLevel={MAX_ZOOM}
+          minZoomLevel={this.state.minZoomLevel}
           initialRegion={{
             latitude: LATITUDE,
             longitude: LONGITUDE,
@@ -50,19 +59,26 @@ export default class App extends Component<Props> {
           loadingEnabled
           loadingIndicatorColor="#666666"
           loadingBackgroundColor="#eeeeee"
-          mapType={Platform.OS === 'android' && this.state.offlineMap ? 'none' : 'standard'}
+          mapType={
+            Platform.OS === 'android' && this.state.offlineMap
+              ? 'none'
+              : 'standard'
+          }
         >
-          {this.state.offlineMap ?
-            <MapView.MbTile
-              pathTemplate={'Path/to/mBTilesDatabase.mbtiles'}
-              tileSize={256}
-            /> : null}
+          {this.state.offlineMap ? (
+            <MapView.MbTile pathTemplate={PATH_TO_MBTILES} tileSize={256} />
+          ) : null}
         </MapView>
         <TouchableOpacity
           style={styles.button}
           onPress={() => this._toggleOfflineMap()}
         >
-          <Text> {this.state.offlineMap ? 'Switch to Online Map' : 'Switch to Offline Map'} </Text>
+          <Text>
+            {' '}
+            {this.state.offlineMap
+              ? 'Switch to Online Map'
+              : 'Switch to Offline Map'}{' '}
+          </Text>
         </TouchableOpacity>
       </View>
     );
