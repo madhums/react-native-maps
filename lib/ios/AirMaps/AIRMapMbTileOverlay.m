@@ -22,7 +22,7 @@
     if ([fileManager fileExistsAtPath:self.URLTemplate]) {
         FMDatabase *offlineDataDatabase = [FMDatabase databaseWithPath:self.URLTemplate];
         [offlineDataDatabase open];
-        NSMutableString *query = [NSMutableString stringWithString: @"SELECT * FROM map INNER JOIN images ON map.tile_id = images.tile_id WHERE map.zoom_level = {z} AND map.tile_column = {x} AND map.tile_row = {y};"];
+        NSMutableString *query = [NSMutableString stringWithString: @"SELECT tile_data FROM tiles WHERE zoom_level = {z} AND tile_column = {x} AND tile_row = {y};"];
         [query replaceCharactersInRange: [query rangeOfString: @"{z}"] withString:[NSString stringWithFormat:@"%li", path.z]];
         [query replaceCharactersInRange: [query rangeOfString: @"{x}"] withString:[NSString stringWithFormat:@"%li", path.x]];
         [query replaceCharactersInRange: [query rangeOfString: @"{y}"] withString:[NSString stringWithFormat:@"%li", path.y]];
