@@ -12,14 +12,16 @@ import MapView from 'react-native-maps';
 const { width, height } = Dimensions.get('window');
 
 // replace PROJECT_ROOT with the right path
-const PATH_TO_MBTILES = '/PROJECT_ROOT/example/countries-raster.mbtiles';
-const MIN_ZOOM = 0;
-const MAX_ZOOM = 10;
-
+// You can generate mbtiles from QGIS
+const PATH_TO_MBTILES = '/PROJECT_ROOT/netherlands.mbtiles';
+const MIN_ZOOM = 5;
+const MAX_ZOOM = 15;
 const ASPECT_RATIO = width / height;
-const LATITUDE = 64.128288;
-const LONGITUDE = -21.827774;
-const LATITUDE_DELTA = 0.022;
+
+// Co-ordinates for Delft, Netherlands
+const LATITUDE = 52.00667;
+const LONGITUDE = 4.35556;
+const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 type Props = {};
