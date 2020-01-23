@@ -8,6 +8,7 @@
 //
 
 #import <MapKit/MapKit.h>
+#include <math.h>
 
 @interface AIRMapMbTileOverlay : MKTileOverlay
 
